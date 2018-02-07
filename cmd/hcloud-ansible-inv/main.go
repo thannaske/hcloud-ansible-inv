@@ -73,11 +73,13 @@ func main() {
 			// This is suitable for all operating systems.
 			configAPIToken := strings.TrimRight(string(content), "\r\n")
 
+			// Check for existence of token
 			if configAPIToken == "" {
 				log.Println("tried to acquire API key from configuration file but file was empty")
 				log.Fatalln(ErrNoAPIKey)
 			}
 
+			// Check API token for validity
 			if len(configAPIToken) != 64 {
 				log.Println("the configuration file did not contain a valid Hetzner Cloud API token (64 chars long)")
 				log.Fatalln(ErrNoAPIKey)
@@ -88,6 +90,13 @@ func main() {
 
 		}
 	} else {
+
+		// Check API token for validity
+		if len(envAPIToken) != 64 {
+			log.Println("the environment variable did not contain a valid Hetzner Cloud API token (64 chars long)")
+			log.Fatalln(ErrNoAPIKey)
+		}
+
 		// We received the token from the environment variable. Now get and print the results.
 		printOutput(envAPIToken)
 	}
