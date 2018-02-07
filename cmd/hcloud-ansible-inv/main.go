@@ -17,17 +17,9 @@ const configFileName = "config.json"
 // ErrNoAPIKey is returned if the program was not able to determine an API key to use to communicate with the Hetzner Cloud API.
 var ErrNoAPIKey = errors.New("there was no API key specified: please check documentation to learn how to specify it")
 
-// ErrFetchError is returned if the program was not able to fetch the hosts from the API or convert it to the JSON-Ansible-inventory style.
-var ErrFetchError = errors.New("was not able to fetch the project's hosts and convert it to Ansible-styled inventory")
-
 func printOutput(apiToken string) {
 	hetznerClient := hcloud.NewClient(hcloud.WithToken(apiToken))
-	inventoryOutput, err := hcloudinventory.GetInventoryFromAPI(hetznerClient)
-
-	if err != nil {
-		log.Println("received an error during inventory fetching: " + err.Error())
-		log.Fatalln(ErrFetchError)
-	}
+	inventoryOutput := hcloudinventory.GetInventoryFromAPI(hetznerClient)
 
 	// Success. Print the output!
 	fmt.Println(inventoryOutput)
