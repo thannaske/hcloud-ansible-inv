@@ -8,6 +8,8 @@ import (
 	"os"
 	"os/user"
 
+	"strings"
+
 	"github.com/hetznercloud/hcloud-go/hcloud"
 	"github.com/thannaske/hetzner-cloud-ansible-inventory"
 )
@@ -68,7 +70,18 @@ func main() {
 				log.Fatalln(ErrNoAPIKey)
 			}
 
-			configAPIToken := string(content)
+			// This is suitable for all operating systems.
+			configAPIToken := strings.TrimRight(string(content), "\r\n")
+
+			if configAPIToken == "" {
+				log.Println("tried to acquire API key from configuration file but file was empty")
+				log.Fatalln(ErrNoAPIKey)
+			}
+
+			if len(configAPIToken) != 64 {
+				log.Println("the configuration file did not contain a valid Hetzner Cloud API token (64 chars long)")
+				log.Fatalln(ErrNoAPIKey)
+			}
 
 			// We received the token from the configuration file. Now get and print the results.
 			printOutput(configAPIToken)
