@@ -6,35 +6,22 @@ Automate your [Hetzner Cloud](https://www.hetzner.de/cloud) instances by using a
 ![See it in action](https://github.com/thannaske/hetzner-cloud-ansible-inventory/raw/master/example.png)
 
 ## Installation
-You can either choose the easy or the DIY-way.
+You are required to have a functional Go setup (including $GOPATH, etc.)
 
-### The easy way
-Just download the precompiled dynamic inventory script and place it within your `$PATH` to be able to call it directly.
-This project is currently untested and alpha. Thereby there won't be any precompiled versions for downloading until this project reaches a stable and tested level. You are happily invited to test it, break it and file a [new issue](https://github.com/thannaske/hetzner-cloud-ansible-inventory/issues/new) afterwards.
+`go get -u github.com/thannaske/hetzner-cloud-ansible-inventory`
 
-### The DIY-way
-First of all you need to acquire the sources of this project. You can either clone it or just use `go get` (recommended). The `-u` flag is required to update all dependencies of this project as well (e.g. the Go-written [Hetzner Cloud API Client](https://github.com/hetznercloud/hcloud-go)).
 
-`
-go get -u github.com/thannaske/hetzner-cloud-ansible-inventory
-`
+## Configuration
+You can either specify the API key to your Hetnzer Cloud project by using the `HETZNER_CLOUD_KEY` environment varialbe or by creating the following file and pasting your API key into it:
 
-Afterwards you can build the sources on your own for your target platform. Execute the following command within `$GOPATH/src/[...]/cmd/hcloud-ansible-inv` to just build the inventory script.
+`~/.config/hetzner-cloud-ansible-inventory/config.json`
 
-`
-go build
-`
-
-Afterwards you are ready to use it.
-
-`
-chmod u+x hcloud-ansible-inv && ./hcloud-ansible-inv --list
-`
+Currently you just need to paste the key. In the future there will be the possibility to manage multiple Hetzner Cloud projects with differend API keys in this configuration file. The inventory script automatically checks for the existance of that configuration file if you don't provide the API key by using the environment variable.
 
 ## Usage
 You are able to use the within your Ansible commands using the `-i` flag.
 
-`ansible -i hcloud-ansible-inv all -m ping`
+`HETZNER_CLOUD_KEY=example ansible -i hcloud-ansible-inv all -m ping`
 
 This command should execute the Ansible ping module and should return a pong for each server you are running at Hetzner Cloud.
 Please consult [Ansible's documentation](http://docs.ansible.com) for further resources concerning the usage of Ansible itself.
