@@ -1,5 +1,5 @@
 # Ansible Inventory for Hetzner Cloud
-![](https://travis-ci.org/thannaske/hcloud-ansible-inv.svg?branch=master)
+![](https://api.travis-ci.org/thannaske/hcloud-ansible-inv.svg?branch=master)  ![](https://goreportcard.com/badge/github.com/thannaske/hcloud-ansible-inv)
 
 Automate your [Hetzner Cloud](https://www.hetzner.de/cloud) instances by using a dynamic inventory script for [Ansible](https://github.com/ansible/ansible).
 
