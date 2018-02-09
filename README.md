@@ -5,18 +5,8 @@ Automate your [Hetzner Cloud](https://www.hetzner.de/cloud) instances by using a
 
 ![See it in action](https://github.com/thannaske/hetzner-cloud-ansible-inventory/raw/master/example.png)
 
-## Installation
-You are required to have a functional Go setup (including $GOPATH, etc.)
-
-`go get -u github.com/thannaske/hetzner-cloud-ansible-inventory`
-
-
-## Configuration
-You can either specify the API key to your Hetnzer Cloud project by using the `HETZNER_CLOUD_KEY` environment varialbe or by creating the following file and pasting your API key into it:
-
-`~/.config/hetzner-cloud-ansible-inventory/config.json`
-
-Currently you just need to paste the key. In the future there will be the possibility to manage multiple Hetzner Cloud projects with differend API keys in this configuration file. The inventory script automatically checks for the existance of that configuration file if you don't provide the API key by using the environment variable.
+## Getting Started
+See [Getting Started](https://github.com/thannaske/hetzner-cloud-ansible-inventory/wiki/Getting-Started) in the repository's wiki. Here you will find always up-to-date installation instructions as well as remarks concerning the configuration and usage of the inventory script.
 
 ## Usage
 You are able to use the within your Ansible commands using the `-i` flag.
