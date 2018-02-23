@@ -11,7 +11,7 @@ import (
 	"strings"
 
 	"github.com/hetznercloud/hcloud-go/hcloud"
-	"github.com/thannaske/hetzner-cloud-ansible-inventory"
+	"github.com/thannaske/hcloud-ansible-inv"
 )
 
 const configFileName = "config.json"
@@ -48,7 +48,7 @@ func main() {
 		}
 
 		// Build configuration file path (equals ~/.config/[...])
-		configDirPath := currentUser.HomeDir + "/.config/hetzner-cloud-ansible-inventory/"
+		configDirPath := currentUser.HomeDir + "/.config/hcloud-ansible-inv/"
 
 		if _, err := os.Stat(configDirPath + configFileName); os.IsNotExist(err) {
 			// Configuration file does not exist, yet. Thereby we'll just prepare the config file and quit.
