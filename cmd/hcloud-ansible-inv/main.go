@@ -16,6 +16,10 @@ import (
 
 const configFileName = "config.json"
 
+type Configuration struct {
+	Projects map[string]string
+}
+
 // ErrNoAPIKey is returned if the program was not able to determine an API key to use to communicate with the Hetzner Cloud API.
 var ErrNoAPIKey = errors.New("there was no API key specified: please check documentation to learn how to specify it")
 
@@ -28,6 +32,10 @@ func printOutput(apiToken string) {
 
 	// Exit with code zero.
 	os.Exit(0)
+}
+
+func readConfiguration() {
+	// Stub
 }
 
 func main() {
